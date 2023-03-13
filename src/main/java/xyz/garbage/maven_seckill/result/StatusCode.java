@@ -3,7 +3,7 @@ package xyz.garbage.maven_seckill.result;
 public enum StatusCode {
 
     // 成功码
-    SUCCESS(200000, "成功！"),
+    SUCCESS(0, "成功！"),
     // 通用错误码
     SERVER_ERROR(500100, "服务端异常！"), BIND_ERROR(500101, "参数校验异常！"),
     ACCESS_LIMIT_REACHED(500102, "访问高峰期，请稍等！"),
