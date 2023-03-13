@@ -28,11 +28,13 @@ public class UserService {
     @Autowired
     RedisUtil redisUtil;
 
-    @Value("${cookie.token.name}")
-    private String COOKIE_NAME_TOKEN;
-
+    private final String COOKIE_NAME_TOKEN;
 
     private final Logger log = LoggerFactory.getLogger(UserService.class);
+
+    public UserService(@Value("cookie.token.name") String cookieTokenName) {
+        this.COOKIE_NAME_TOKEN = cookieTokenName;
+    }
 
     /**
      * 后续防止缓存击穿：

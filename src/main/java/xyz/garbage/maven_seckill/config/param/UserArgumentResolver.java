@@ -20,8 +20,11 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     @Autowired
     UserService userService;
 
-    @Value("${cookie.token.name}")
-    private String COOKIE_NAME_TOKEN;
+    private final String COOKIE_NAME_TOKEN;
+
+    public UserArgumentResolver(@Value("${cookie.token.name}") String cookieTokenName) {
+        this.COOKIE_NAME_TOKEN = cookieTokenName;
+    }
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
