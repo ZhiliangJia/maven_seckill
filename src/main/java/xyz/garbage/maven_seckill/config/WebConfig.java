@@ -11,14 +11,26 @@ import java.util.List;
 
 @Configuration
 public class WebConfig extends WebMvcConfigurationSupport {
+
+
     @Autowired
     UserArgumentResolver userArgumentResolver;
 
+    /**
+     * 自定义的参数解析器
+     *
+     * @param argumentResolvers
+     */
     @Override
     protected void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(userArgumentResolver);
     }
 
+    /**
+     * 用于释放资源
+     *
+     * @param registry
+     */
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
