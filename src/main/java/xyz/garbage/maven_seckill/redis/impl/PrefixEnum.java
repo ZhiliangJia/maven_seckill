@@ -6,7 +6,7 @@ public enum PrefixEnum {
     // Order订单缓存信息
     ORDER_BY_GID_UID("OrderKey:obg_", 120),
     // SecKillGood秒杀商品信息
-    SEC_KILL_GOOD_Number("SecKillGoodKey:gn_", -1),
+    SEC_KILL_GOOD_OVER("SecKillOver:sko_", -1),
     // User用户缓存信息
     USER_TOKEN("UserKey:ut_", 60 * 60 * 24), USER_BY_ID("UserKey:uid_", 60),
     // Default信息
