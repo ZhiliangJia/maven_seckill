@@ -50,4 +50,15 @@ public class GoodsVo extends Goods {
     public void setVersion(Integer version) {
         this.version = version;
     }
+
+    @Override
+    public String toString() {
+        return "GoodsVo{" +
+                "seckillPrice=" + seckillPrice +
+                ", stockCount=" + stockCount +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", version=" + version +
+                '}';
+    }
 }

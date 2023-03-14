@@ -1,9 +1,6 @@
 package xyz.garbage.maven_seckill.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import xyz.garbage.maven_seckill.bean.SeckillGoods;
 import xyz.garbage.maven_seckill.vo.GoodsVo;
 
@@ -11,9 +8,25 @@ import java.util.List;
 
 @Mapper
 public interface GoodsMapper {
-    @Select("select g.*, sg.stock_count, sg.start_date, sg.end_date, sg.seckill_price, sg.version from sk_goods_seckill sg left join sk_goods g on sg.goods_id = g.id")
+    @Results(id = "GoodsAndSeckillResult", value = {
+            @Result(property = "id", column = "id", id = true),
+            @Result(property = "goodsName", column = "goods_name"),
+            @Result(property = "goodsTitle", column = "goods_title"),
+            @Result(property = "goodsImg", column = "goods_img"),
+            @Result(property = "goodsDetail", column = "goods_detail"),
+            @Result(property = "goodsPrice", column = "goods_price"),
+            @Result(property = "goodsStock", column = "goods_stock"),
+            @Result(property = "stockCount", column = "stock_count"),
+            @Result(property = "startDate", column = "start_date"),
+            @Result(property = "endDate", column = "end_date"),
+            @Result(property = "seckillPrice", column = "seckill_price"),
+            @Result(property = "version", column = "version")
+    })
+    @Select("select g.*, sg.stock_count, sg.start_date, sg.end_date, sg.seckill_price, sg.version " +
+            "from sk_goods_seckill sg left join sk_goods g on sg.goods_id = g.id")
     public List<GoodsVo> getGoodsVoList();
 
+    @ResultMap("GoodsAndSeckillResult")
     @Select("select g.*, sg.stock_count, sg.start_date, sg.end_date, sg.seckill_price, sg.version  from sk_goods_seckill sg left join sk_goods g  on sg.goods_id = g.id where g.id = #{goodsId}")
     public GoodsVo getGoodsVoByGoodsId(@Param("goodsId") long goodsId);
 
