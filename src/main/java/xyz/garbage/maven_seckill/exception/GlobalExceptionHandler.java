@@ -22,12 +22,12 @@ public class GlobalExceptionHandler {
     public Result<String> exceptionHandler(HttpServletRequest request, Exception exception) {
         log.error(exception.getMessage());
         if (exception instanceof GlobalException) {
-            return Result.Error(((GlobalException) exception).getStatusCode());
+            return Result.error(((GlobalException) exception).getStatusCode());
         } else if (exception instanceof BindException) {
             List<ObjectError> errors = ((BindException) exception).getAllErrors();
-            return Result.Error(StatusCode.BIND_ERROR, errors.get(0).getDefaultMessage());
+            return Result.error(StatusCode.BIND_ERROR, errors.get(0).getDefaultMessage());
         } else {
-            return Result.Error(StatusCode.SERVER_ERROR);
+            return Result.error(StatusCode.SERVER_ERROR);
         }
     }
 }

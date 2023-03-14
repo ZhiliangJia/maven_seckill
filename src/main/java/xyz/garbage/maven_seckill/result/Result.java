@@ -5,11 +5,11 @@ public class Result<T> {
     private String message;
     private T data;
 
-    public static <T> Result<T> Success(T data) {
+    public static <T> Result<T> success(T data) {
         return new Result<T>(data);
     }
 
-    public static <T> Result<T> Error(StatusCode statusCode, Object... args) {
+    public static <T> Result<T> error(StatusCode statusCode, Object... args) {
         return new Result<T>(statusCode.getCode(), String.format(statusCode.getMessage(), args));
     }
 

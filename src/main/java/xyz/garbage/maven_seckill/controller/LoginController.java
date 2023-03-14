@@ -27,7 +27,7 @@ public class LoginController {
     @RequestMapping(value = "/do_login", method = RequestMethod.POST)
     @ResponseBody
     public Result<String> doLogin(HttpServletResponse response, @Valid LoginVo loginVo) {
-        return Result.Success(userService.login(response, loginVo));
+        return Result.success(userService.login(response, loginVo));
     }
 
     @RequestMapping(value = "/to_login", method = RequestMethod.GET)
