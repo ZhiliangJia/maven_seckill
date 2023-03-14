@@ -4,7 +4,7 @@ public enum PrefixEnum {
     // Good商品缓存信息
     GOOD_LIST("GoodKey:gl_", 60), GOOD_DETAIL("GoodKey:gd_", 30), GOOD_STOCK("GoodKey:gs_", -1),
     // Order订单缓存信息
-    ORDER_BY_GID("OrderKey:obg_", 120),
+    ORDER_BY_GID_UID("OrderKey:obg_", 120),
     // SecKillGood秒杀商品信息
     SEC_KILL_GOOD_Number("SecKillGoodKey:gn_", -1),
     // User用户缓存信息
