@@ -37,3 +37,6 @@ src/main/resources/application.properties
 
 # Log
 catalina.base_IS_UNDEFINED/logs/*.log
+
+# JMeter
+jmeter
