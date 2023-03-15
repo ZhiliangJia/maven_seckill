@@ -32,7 +32,7 @@ public class UserService {
 
     private final Logger log = LoggerFactory.getLogger(UserService.class);
 
-    public UserService(@Value("cookie.token.name") String cookieTokenName) {
+    public UserService(@Value("${cookie.token.name}") String cookieTokenName) {
         this.COOKIE_NAME_TOKEN = cookieTokenName;
     }
 
