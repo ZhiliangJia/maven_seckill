@@ -24,7 +24,10 @@ public class RedisUtil {
     }
 
     public <T> void setStringValue(IRedisKey redisKey, T value) {
-        stringRedisTemplate.opsForValue().set(redisKey.getRealKey(), SerializeUtil.beanToString(value), redisKey.getExpireSeconds(), TimeUnit.SECONDS);
+        if (redisKey.getExpireSeconds() != -1)
+            stringRedisTemplate.opsForValue().set(redisKey.getRealKey(), SerializeUtil.beanToString(value), redisKey.getExpireSeconds(), TimeUnit.SECONDS);
+        else
+            stringRedisTemplate.opsForValue().set(redisKey.getRealKey(), SerializeUtil.beanToString(value));
     }
 
     public void deleteStringKey(IRedisKey redisKey) {
@@ -35,20 +38,24 @@ public class RedisUtil {
         return stringRedisTemplate.hasKey(redisKey.getRealKey());
     }
 
-    public void incr(IRedisKey redisKey) {
+    public long incr(IRedisKey redisKey) {
+        Long increment = 0L;
         try {
-            Long increment = stringRedisTemplate.opsForValue().increment(redisKey.getRealKey());
+            increment = stringRedisTemplate.opsForValue().increment(redisKey.getRealKey());
         } catch (RedisSystemException exception) {
             log.error("`{}` key auto-increment has goes wrong. （{}）", redisKey.getRealKey(), exception.getMessage());
         }
+        return increment;
     }
 
-    public void decr(IRedisKey redisKey) {
+    public long decr(IRedisKey redisKey) {
+        Long decrement = 0L;
         try {
-            Long decrement = stringRedisTemplate.opsForValue().decrement(redisKey.getRealKey());
+            decrement = stringRedisTemplate.opsForValue().decrement(redisKey.getRealKey());
         } catch (RedisSystemException exception) {
             log.error("`{}` key auto-decrement has goes wrong. （{}）", redisKey.getRealKey(), exception.getMessage());
         }
+        return decrement;
     }
 
 

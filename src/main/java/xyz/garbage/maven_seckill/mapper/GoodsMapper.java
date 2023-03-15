@@ -31,7 +31,7 @@ public interface GoodsMapper {
     public GoodsVo getGoodsVoByGoodsId(@Param("goodsId") long goodsId);
 
     @Update("update sk_goods_seckill set stock_count = stock_count - 1, version= version + 1 where goods_id = #{goodsId} and stock_count > 0" +
-            " and version = #{version} and #{startDate} < start_date and #{startDate} > end_date")
+            " and version = #{version}")
     public int reduceStockByVersion(SeckillGoods seckillGoods);
 
     @Select("select version from sk_goods_seckill  where goods_id = #{goodsId}")
