@@ -1,6 +1,8 @@
 package xyz.garbage.maven_seckill.config;
 
+import org.springframework.amqp.core.Queue;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -12,9 +14,10 @@ import java.util.List;
 @Configuration
 public class WebConfig extends WebMvcConfigurationSupport {
 
-
     @Autowired
     UserArgumentResolver userArgumentResolver;
+
+    public final static String queueName = "seckill_queue";
 
     /**
      * 自定义的参数解析器
@@ -38,5 +41,13 @@ public class WebConfig extends WebMvcConfigurationSupport {
                 .addResourceLocations("classpath:/resources/")
                 .addResourceLocations("classpath:/static/");
         super.addResourceHandlers(registry);
+    }
+
+    /**
+     * 消息队列
+     */
+    @Bean
+    public Queue queue() {
+        return new Queue(queueName, true);
     }
 }
